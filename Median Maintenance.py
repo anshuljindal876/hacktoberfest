@@ -127,26 +127,17 @@ def getMedian(num, val):
 def readFile(path):
     data = open(path)
 
-    stream = []
-    for value in data:
-        stream.append(int(value))
-
-    return stream
+    return [int(value) for value in data]
     
 if __name__ == '__main__':
     stream = readFile("medians.txt")
-    
-    num = -1
+
     medians = []    ## Stores all medians sequentially as stream is accepted by the program
 
     ## Pass data one by one.
-    for i in range(len(stream)):
-        num += 1
+    for num, i in enumerate(range(len(stream))):
         m = getMedian(num, stream[i])
         medians.append(m)
-       
-    s = 0
-    for m in medians:
-        s = s + m[0]    ## For sum calculation, only the first median is considered in case of two medians
 
+    s = sum(m[0] for m in medians)
     print("SUM OF MEDIANS IS = ", s)
